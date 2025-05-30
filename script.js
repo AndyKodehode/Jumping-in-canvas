@@ -12,6 +12,9 @@ context = canvas.getContext('2d');
 let playerX = 0;
 let playerY = 375;
 
+let randomObjX = 200
+let randomObjY = 150
+
 let velocityX = 0;
 let velocityY = 0;
 
@@ -31,6 +34,10 @@ function update() {
 
   context.fillStyle = 'red';
   context.fillRect(playerX, playerY, 25, 25);
+  
+
+ 
+ 
 }
 
 document.addEventListener('keydown', jump);
@@ -59,3 +66,38 @@ function jump(e) {
     }, updateSpeed);
   }
 }
+
+let obejctCount = 0
+
+
+function randomObject(){
+
+    
+
+  let timerId = setInterval(()=>{
+   let newObjectX = Math.floor(Math.random() * 400)
+   let newObjectY = Math.floor(Math.random() * 400)
+
+   
+   context.fillStyle = 'yellow'
+   context.fillRect(randomObjX, randomObjY, 25, 25)
+
+   randomObjX = newObjectX
+   randomObjY = newObjectY
+
+   obejctCount += 1
+   console.log('newX is:' + newObjectX)
+   console.log('newY is:' + newObjectY)
+
+   if(obejctCount > 3){
+    clearInterval(timerId)
+
+    console.log('counting done')
+  }
+  }, 3000)
+
+ 
+
+}
+
+randomObject()
