@@ -18,6 +18,7 @@ let velocityY = 0;
 let updateSpeed = 30;
 let jumpSpeed = 5;
 let forwardSpeed = 5
+let blockSize = 25
 
 let isJumping = false;
 
@@ -34,24 +35,41 @@ function update() {
   context.fillRect(playerX, playerY, 25, 25);
 }
 
-document.addEventListener('keydown', movePlayer1, jump);
+document.addEventListener('keydown', (e) =>{
 
-
-function movePlayer1(e){
   if(e.code === 'ArrowRight'){
-    playerX += forwardSpeed
+    moveRight()
+  } else if( e.code === 'ArrowUp'){
+    jump()
+  } else if (e.code === 'ArrowLeft'){
+    moveLeft()
   }
-  if(e.code === 'ArrowLeft'){
-    playerX -= forwardSpeed
+
+});
+
+
+function moveRight(){
+   
+  playerX += forwardSpeed
+
+  if(playerX === canvas.width ){
+    playerX = 0
   }
 
 }
 
+function moveLeft(){
+  playerX -= forwardSpeed
+
+  if(playerX === -25){
+    playerX = canvas.width - blockSize
+  }
+}
+
 let counting = 0;
 
-function jump(e) {
-  if (e.code === 'ArrowUp' && !isJumping) {
-    isJumping = true;
+function jump() {
+
     let timerId = setInterval(() => {
       velocityY = -jumpSpeed;
       counting += 1;
@@ -70,4 +88,4 @@ function jump(e) {
       }
     }, updateSpeed);
   }
-}
+
