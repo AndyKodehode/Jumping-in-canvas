@@ -17,6 +17,7 @@ let velocityY = 0;
 
 let updateSpeed = 30;
 let jumpSpeed = 5;
+let forwardSpeed = 5
 
 let isJumping = false;
 
@@ -25,7 +26,7 @@ setInterval(update, updateSpeed);
 function update() {
   context.fillStyle = 'black';
   context.fillRect(0, 0, canvas.width, canvas.height);
-
+  
   playerX += velocityX;
   playerY += velocityY;
 
@@ -33,7 +34,18 @@ function update() {
   context.fillRect(playerX, playerY, 25, 25);
 }
 
-document.addEventListener('keydown', jump);
+document.addEventListener('keydown', movePlayer1, jump);
+
+
+function movePlayer1(e){
+  if(e.code === 'ArrowRight'){
+    playerX += forwardSpeed
+  }
+  if(e.code === 'ArrowLeft'){
+    playerX -= forwardSpeed
+  }
+
+}
 
 let counting = 0;
 
